@@ -1,0 +1,16 @@
+#!/bin/bash
+# Script para automatizar inicio del servidor Apache y sus servicios.
+if sudo /opt/lampp/lampp status | grep -q "Apache is running"; then
+	echo "XAMPP ya está corriendo, deteniendolo..."
+	echo "[d] Detener"
+	echo "[r] Reiniciar"
+	read -p "Opción: " opcion
+	case $opcion in
+	d) sudo /opt/lampp/lampp stop ;;
+	r) sudo /opt/lampp/lampp restart ;;
+	*) echo "Opcion no valida!" ;;
+	esac
+else
+	echo "XAMPP no está corriendo, iniciándolo..."
+	sudo /opt/lampp/lampp start
+fi
