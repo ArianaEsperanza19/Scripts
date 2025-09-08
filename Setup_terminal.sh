@@ -1,6 +1,6 @@
 #!/bin/bash
-# Script para configurar el terminal con paqueteria apt y flatpak
-# Recuerda instalar primero snapd y flatpak, reinicia la terminal y luego ejecuta este script
+# Script para la instalación de mis paquetes con apt y flatpak
+# Recuerda instalar primero snapd y flatpak, reiniciar la terminal y luego ejecuta este script para garantizar que las aplicaciones snap y flatpak se instalan correctamente.
 # --- Función para instalar y verificar un paquete apt ---
 exito=()
 fracasos=()
