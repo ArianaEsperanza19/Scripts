@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script para la instalación de mis paquetes con apt y flatpak
-# Recuerda instalar primero snapd y flatpak, reiniciar la terminal y luego ejecuta este script para garantizar que las aplicaciones snap y flatpak se instalan correctamente.
+# Recuerda instalar primero snapd y flatpak, reiniciar la terminal y luego ejecuta este script para una instalación sin inconvenientes.
 # --- Función para instalar y verificar un paquete apt ---
 exito=()
 fracasos=()
@@ -34,7 +34,7 @@ function install_and_verify_flatpak {
 function install_and_verify_snap {
 	local package_name=$1
 	echo "Instalando: $package_name..."
-	sudo snap install "$package_name"
+	sudo snap install "$package_name" --classic
 
 	if [ $? -eq 0 ]; then
 		echo "✅ '$package_name' instalado exitosamente."
@@ -83,6 +83,9 @@ install_and_verify_apt lutris
 install_and_verify_apt steam
 install_and_verify_apt vlc
 install_and_verify_apt ibus-anthy
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 install_and_verify_flatpak flatseal
 install_and_verify_flatpak cpu-x
 install_and_verify_flatpak logs
