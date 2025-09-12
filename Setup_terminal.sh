@@ -82,6 +82,9 @@ install_and_verify_apt flameshot
 install_and_verify_apt lutris
 install_and_verify_apt steam
 install_and_verify_apt vlc
+if ! command wget --version &>/dev/null; then
+	install_and_verify_apt wget
+fi
 wget -P $HOME/Descargas/ http://ftp.de.debian.org/debian/pool/main/i/ibus-anthy/ibus-anthy_1.5.17-1_amd64.deb
 sudo dpkg -i $HOME/Descargas/ibus-anthy_1.5.17-1_amd64.deb
 if [ $? -eq 0 ]; then
