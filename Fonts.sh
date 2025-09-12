@@ -33,7 +33,16 @@ ZIP="$HOME/.local/share/fonts/3270.zip"
 NERD="$HOME/.local/share/fonts/nerd"
 sudo unzip $ZIP -d $NERD
 sudo rm -rd $ZIP
+sudo chown -R ariana $NERD
 echo "Nerd fonts instaladas"
+sudo wget -O "$FONTS/kaisei-harunoumi.zip" 'https://gwfh.mranftl.com/api/fonts/kaisei-harunoumi?download=zip&subsets=japanese,latin&variants=500,700,regular&formats=woff2'
+ZIP="$HOME/.local/share/fonts/kaisei-harunoumi.zip"
+KAISEI="$HOME/.local/share/fonts/kaisei-harunoumi"
+sudo unzip $ZIP -d $KAISEI
+sudo rm -rd $ZIP
+sudo chown -R ariana $KAISEI
+echo "Kaisei fonts instaladas"
+
 # Actualizar fuentes
 fc-cache -fv
 echo "Nota, para instalar manualmente las fuentes kaisei-harunoumi"
