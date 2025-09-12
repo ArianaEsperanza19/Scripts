@@ -84,16 +84,19 @@ install_and_verify_apt steam
 install_and_verify_apt vlc
 wget -P $HOME/Descargas/ http://ftp.de.debian.org/debian/pool/main/i/ibus-anthy/ibus-anthy_1.5.17-1_amd64.deb
 sudo dpkg -i $HOME/Descargas/ibus-anthy_1.5.17-1_amd64.deb
-
 if [ $? -eq 0 ]; then
 	echo "✅ 'ibus-anthy' instalado exitosamente."
 	exito+=("ibus-anthy")
+	sudo rm -drf $HOME/Descargas/ibus-anthy_1.5.17-1_amd64.deb
 else
-	echo "❌ ¡ERROR! No se pudo instalar 'ibus-anthy'."
-	fracasos+=("ibus-anthy")
+	if [ $? -eq 0 ]; then
+		sudo apt-get install -f
+		sudo dpkg -i $HOME/Descargas/ibus-anthy_1.5.17-1_amd64.deb
+	else
+		echo "❌ ¡ERROR! No se pudo instalar 'ibus-anthy'."
+		fracasos+=("ibus-anthy")
+	fi
 fi
-
-sudo rm -drf $HOME/Descargas/ibus-anthy_1.5.17-1_amd64.deb
 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 

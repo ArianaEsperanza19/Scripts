@@ -28,10 +28,10 @@ sudo chown -R ariana $DESTINO
 echo "¡Hecho! Contenido del repositorio clonado exitosamente."
 
 FONTS="$HOME/.local/share/fonts/"
-wget -P $FONTS https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/3270.zip
+sudo wget -P $FONTS https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/3270.zip
 ZIP="$HOME/.local/share/fonts/3270.zip"
 NERD="$HOME/.local/share/fonts/nerd"
-unzip $ZIP -d $NERD
+sudo unzip $ZIP -d $NERD
 sudo rm -rd $ZIP
 echo "Nerd fonts instaladas"
 # Actualizar fuentes
