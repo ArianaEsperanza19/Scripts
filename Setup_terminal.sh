@@ -82,6 +82,7 @@ install_and_verify_apt flameshot
 install_and_verify_apt lutris
 install_and_verify_apt steam
 install_and_verify_apt vlc
+install_and_verify_apt gnome-logs
 if ! command wget --version &>/dev/null; then
 	install_and_verify_apt wget
 fi
@@ -105,7 +106,6 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 
 install_and_verify_flatpak flatseal
 install_and_verify_flatpak cpu-x
-install_and_verify_flatpak logs
 install_and_verify_flatpak drawio
 install_and_verify_flatpak obsidian
 install_and_verify_flatpak peazip
