@@ -65,6 +65,8 @@ install_and_verify_apt tmux
 install_and_verify_apt curl
 install_and_verify_apt cmus
 install_and_verify_apt pandoc
+install_and_verify_apt pavucontrol
+install_and_verify_apt obs-studio
 install_and_verify_snap nvim
 echo "#------------------------------------------------------------------------------------------------------#"
 echo "✅ Todos los programas esenciales de la terminal han sido procesados."
@@ -82,10 +84,17 @@ install_and_verify_apt flameshot
 install_and_verify_apt lutris
 install_and_verify_apt steam
 install_and_verify_apt vlc
-install_and_verify_apt gnome-logs
+# Instalar alacritty para X11
+install_and_verify_apt gnome-log
+if [ ! $XDG_SESSION_TYPE = "wayland" ]; then
+	install_and_verify_apt alacritty
+	bash alacritty_config.sh
+fi
+# Instalar wget si no está instalado
 if ! command wget --version &>/dev/null; then
 	install_and_verify_apt wget
 fi
+# Instalar ibus-anthy
 wget -P $HOME/Descargas/ http://ftp.de.debian.org/debian/pool/main/i/ibus-anthy/ibus-anthy_1.5.17-1_amd64.deb
 sudo dpkg -i $HOME/Descargas/ibus-anthy_1.5.17-1_amd64.deb
 if [ $? -eq 0 ]; then
@@ -102,6 +111,7 @@ else
 	fi
 fi
 
+# Configuración de flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 install_and_verify_flatpak flatseal
@@ -227,5 +237,5 @@ echo "1. Recuerda configurar zoxide, ranger, eza, ibus y tmux."
 echo "2. Para el uso interactivo en una nueva terminal, las rutas de zoxide y Deno deberían estar en tu PATH."
 echo "   source \$HOME/.deno/bin" # Esta línea puede no ser necesaria si el script de Deno ya modifica ~/.bashrc
 echo "   eval \"\$(zoxide init bash)\""
-echo "3. Instala mediante la tienda de software (o Flatpak/Snap si no están disponibles en apt) las aplicaciones gráficas como Blanket y Xournal++."
+echo "3. Instala mediante la tienda de software (o Flatpak/Snap si no están disponibles en apt) las aplicaciones gráficas como Xournal++."
 echo "#------------------------------------------------------------------------------------------------------#"
