@@ -62,6 +62,9 @@ install_and_verify_apt ripgrep
 install_and_verify_apt btop
 install_and_verify_apt git
 install_and_verify_apt tmux
+if [ $? -eq 0 ]; then
+	bash tmux_config.sh
+fi
 install_and_verify_apt curl
 install_and_verify_apt cmus
 install_and_verify_apt pandoc
