@@ -12,6 +12,7 @@ else
 alias ls='eza --icons -a --group-directories-first' # Nuevo ls con opciones preferidas
 alias ld='eza --icons -D --group-directories-first'  # Solo Folder
 alias ll='eza --icons -l --header --group-directories-first' # Formato Largo
+alias lll='eza --icons -la --header --group-directories-first' # Formato Largo e incluyendo archivos ocultos
 alias lo='eza --icons -lo --header --group-directories-first' # Formato Largo Listado con permisos octales
 alias lt='eza --icons -aT --group-directories-first' # Mostar Dentro Folder
 alias l.='eza --icons -a | egrep "^\."' # Solo ocultos
