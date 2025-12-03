@@ -138,6 +138,7 @@ install_and_verify_apt texlive-latex-extra
 install_and_verify_apt latexmk
 install_and_verify_apt texlive-lang-spanish
 install_and_verify_apt texlive-xetex
+install_and_verify_apt typst
 
 echo "------------------------------------------------------------------------------------------------------"
 
