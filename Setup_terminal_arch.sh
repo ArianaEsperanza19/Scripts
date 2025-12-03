@@ -56,6 +56,7 @@ install_and_verify_pacman pandoc
 install_and_verify_pacman pavucontrol
 install_and_verify_pacman obs-studio
 install_and_verify_pacman nvim
+bash Neovim_setup.sh
 install_and_verify_pacman typst
 echo "#------------------------------------------------------------------------------------------------------#"
 echo "✅ Todos los programas esenciales de la terminal han sido procesados."
