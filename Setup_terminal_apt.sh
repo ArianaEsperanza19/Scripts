@@ -71,6 +71,7 @@ install_and_verify_apt pandoc
 install_and_verify_apt pavucontrol
 install_and_verify_apt obs-studio
 install_and_verify_snap nvim
+bash Neovim_setup.sh
 echo "#------------------------------------------------------------------------------------------------------#"
 echo "✅ Todos los programas esenciales de la terminal han sido procesados."
 echo "------------------------------------------------------------------------------------------------------"
