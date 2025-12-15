@@ -65,7 +65,7 @@ echo "✅ Nerd Fonts instaladas en $NERD_DIR"
 # --- Kaisei Fonts ---
 echo -e "\n--- Iniciando instalación de Kaisei Harunoumi ---"
 ZIP_KAISEI="$FONTS_DIR/kaisei-harunoumi.zip"
-KAISEI_DIR="$FONTS_DIR/kaisei-harunoumi"
+KAISEI_DIR="$FONTS_DIR/kaisei_harunoumi"
 
 # 1. Descargar
 sudo wget -O "$ZIP_KAISEI" 'https://gwfh.mranftl.com/api/fonts/kaisei-harunoumi?download=zip&subsets=japanese,latin&variants=500,700,regular&formats=woff2'
