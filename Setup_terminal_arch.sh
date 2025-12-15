@@ -95,6 +95,7 @@ install_and_verify_flatpak flatseal
 install_and_verify_flatpak drawio
 install_and_verify_flatpak peazip
 install_and_verify_flatpak joplin
+install_and_verify_flatpak luna
 echo "------------------------------------------------------------------------------------------------------"
 echo "✅ ¡Script completado! Se han procesado todas las instalaciones de aplicaciones GUI."
 echo "------------------------------------------------------------------------------------------------------"
