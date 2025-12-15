@@ -1,5 +1,6 @@
 #!/bin/bash
 # Script para crear un archivo .Mis_variables en la carpeta actual y agregarlo al .bashrc
+CURRENT_USER=$(whoami)
 cd ~/
 
 # Atento: Si el archivo ya existe, no se modificará
@@ -12,7 +13,7 @@ else
 	if echo "# Editor de terminal por defecto
 		export VISUAL=nvim
 		# Mis scripts
-		export PATH=$PATH:/home/ariana/Otros/Mis_scripts" >>.Mis_variables; then
+		export PATH=$PATH:/home/$CURRENT_USER/Otros/Mis_scripts" >>.Mis_variables; then
 		echo "El archivo Mis_variables se ha creado correctamente."
 	fi
 fi
