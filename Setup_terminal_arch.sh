@@ -66,15 +66,12 @@ echo "✅ Iniciando la instalación de otras aplicaciones..."
 echo "------------------------------------------------------------------------------------------------------"
 exito+=("#------------------------Otros Programas------------------------#")
 install_and_verify_pacman zathura
-install_and_verify_pacman anki # Error no encontrado
 install_and_verify_pacman keepassxc
-install_and_verify_pacman stacer # Error no encontrado
 install_and_verify_pacman syncthing
 install_and_verify_pacman flameshot
 install_and_verify_pacman lutris
 install_and_verify_pacman steam # selecciona el vulkan-driver y las librerias
 install_and_verify_pacman vlc
-install_and_verify_pacman gnome-log
 if [ ! $XDG_SESSION_TYPE = "wayland" ]; then
 	install_and_verify_pacman alacritty
 	bash alacritty_config.sh
@@ -96,6 +93,7 @@ install_and_verify_flatpak drawio
 install_and_verify_flatpak peazip
 install_and_verify_flatpak joplin
 install_and_verify_flatpak luna
+install_and_verify_flatpak Ankiweb
 echo "------------------------------------------------------------------------------------------------------"
 echo "✅ ¡Script completado! Se han procesado todas las instalaciones de aplicaciones GUI."
 echo "------------------------------------------------------------------------------------------------------"
@@ -105,7 +103,6 @@ echo "✅ Iniciando la instalación de las herramientas de desarrollo..."
 echo "------------------------------------------------------------------------------------------------------"
 
 exito+=("#------------------------Herramientas de desarrollo------------------------#")
-# Instalar LaTeX
 # Buscando paquetes
 
 echo "------------------------------------------------------------------------------------------------------"
