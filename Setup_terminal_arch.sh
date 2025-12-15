@@ -40,6 +40,7 @@ exito+=("#------------------------Programas esenciales de la terminal-----------
 install_and_verify_pacman eza
 install_and_verify_pacman tldr
 install_and_verify_pacman zoxide
+install_and_verify_pacman fzf
 install_and_verify_pacman ranger
 install_and_verify_pacman duf
 install_and_verify_pacman ncdu

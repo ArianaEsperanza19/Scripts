@@ -1,8 +1,7 @@
 #!/bin/bash
 # Script para la configuración de alacritty
 
-if [ ! -d "$HOME/.config/alacritty" ] && [ ! $XDG_SESSION_TYPE = "wayland" ]; then
-	mkdir -p "$HOME/.config/alacritty"
+config() {
 	echo '
 [bell]
 animation = "Ease"
@@ -71,19 +70,48 @@ startup_mode = "Windowed"  # Asegúrate de que Alacritty se inicie en modo venta
 x = 10
 y = 10
 
-[shell]
-program = "/bin/bash"  # O el shell que uses
+[terminal]
+
+[terminal.shell]
+program = "/bin/bash"
 args = ["--login"]
 # Si tienes Tmux
 # program = "/usr/bin/tmux"
 # args = ["new-session", "-A", "-s", "default"]
 	' >>"$HOME/.config/alacritty/alacritty.toml"
+}
+
+if [ ! -d "$HOME/.config/alacritty" ]; then
+	mkdir -p "$HOME/.config/alacritty"
+	config
 
 	if [ $? -eq 0 ]; then
 		echo "✅ Alacritty configurado exitosamente."
+		exit 0
 	else
 		echo "❌ ¡ERROR! No se pudo configurar Alacritty."
 	fi
 else
-	echo "Alacritty ya estaba instalado"
+	if [ "$HOME/.config/alacritty/alacritty.toml" ]; then
+		echo "Alacritty ya estaba instalado"
+		# Recibir input
+		echo "1. Remplazar configuración anterior."
+		echo "2. Dejar y continuar."
+		read -p "¿Que hacer a continuacion?: " op
+		case $op in
+		1)
+			rm -R "$HOME/.config/alacritty/alacritty.toml"
+			config
+			;;
+		2)
+			exit 0
+			;;
+		*)
+			exit 0
+			;;
+		esac
+
+	else
+		echo "✅ Alacritty configurado exitosamente."
+	fi
 fi
