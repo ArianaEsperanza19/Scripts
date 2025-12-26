@@ -20,7 +20,7 @@ function install_and_verify_pacman {
 function install_and_verify_flatpak {
 	local package_name=$1
 	echo "Instalando: $package_name..."
-	sudo flatpak install -y "$package_name"
+	sudo flatpak install "$package_name"
 
 	if [ $? -eq 0 ]; then
 		echo "✅ '$package_name' instalado exitosamente."
@@ -53,6 +53,9 @@ if [ $? -eq 0 ]; then
 fi
 install_and_verify_pacman curl
 install_and_verify_pacman cmus
+if [ $? -eq 0 ]; then
+	sudo pacman -Syu libvorbis flac wavpack libmad
+fi
 install_and_verify_pacman pandoc
 install_and_verify_pacman pavucontrol
 install_and_verify_pacman obs-studio
@@ -72,9 +75,9 @@ install_and_verify_pacman syncthing
 install_and_verify_pacman flameshot
 install_and_verify_pacman lutris
 install_and_verify_pacman steam # selecciona el vulkan-driver y las librerias
-install_and_verify_pacman vlc
-if [ ! $XDG_SESSION_TYPE = "wayland" ]; then
-	install_and_verify_pacman alacritty
+install_and_verify_pacman mpv   # Sustituto a vlc, el cual da problemas de compatibilidad
+install_and_verify_pacman alacritty
+if [ $? -eq 0 ]; then
 	bash alacritty_config.sh
 fi
 # Instalar wget si no está instalado
