@@ -45,6 +45,7 @@ install_and_verify_pacman ranger
 install_and_verify_pacman duf
 install_and_verify_pacman ncdu
 install_and_verify_pacman ripgrep
+install_and_verify_pacman bat
 install_and_verify_pacman btop
 install_and_verify_pacman git
 install_and_verify_pacman tmux
