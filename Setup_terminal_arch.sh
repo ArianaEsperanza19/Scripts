@@ -73,6 +73,7 @@ exito+=("#------------------------Otros Programas------------------------#")
 install_and_verify_pacman zathura
 install_and_verify_pacman keepassxc
 install_and_verify_pacman syncthing
+install_and_verify_pacman qbittorrent
 install_and_verify_pacman flameshot
 install_and_verify_pacman lutris
 install_and_verify_pacman steam # selecciona el vulkan-driver y las librerias

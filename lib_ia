@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd ~/Otros/Mis_scripts/Bibliotecario_Llama/Ollama
+source .venv/bin/activate
+python main.py

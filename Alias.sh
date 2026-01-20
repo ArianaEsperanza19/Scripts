@@ -18,7 +18,8 @@ alias lt='eza --icons -aT --group-directories-first' # Mostar Dentro Folder
 alias l.='eza --icons -a | egrep "^\."' # Solo ocultos
 alias li='eza --icons -a --git-ignore --group-directories-first' # ignorar archivos de .gitignore
 alias lg='eza --icons -al --header --git --group-directories-first' # Formato Largo mas Git data
-alias lp='eza --icons -al --header --octal-permissions --group-directories-first' # Formato Largo mas Permisos en octal y archivos ocultos" >>.alias_bash; then
+alias lp='eza --icons -al --header --octal-permissions --group-directories-first' # Formato Largo mas Permisos en octal y archivos ocultos
+alias bashrc='nvim ~/.bashrc' # Acceso rapido al bashrc" >>.alias_bash; then
 		echo "El archivo $archivo se ha creado correctamente."
 	fi
 fi
