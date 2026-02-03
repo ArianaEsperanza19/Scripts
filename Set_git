@@ -1,0 +1,4 @@
+#!/bin/bash
+git config --global user.name "ArianaEsperanza19"
+git config --global user.email uribeatencio2021@gmail.com
+git config --list

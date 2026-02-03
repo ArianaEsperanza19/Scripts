@@ -91,6 +91,11 @@ install_and_verify_pacman obsidian
 install_and_verify_pacman xournalpp
 install_and_verify_pacman cpu-x
 install_and_verify_pacman handbrake
+install_and_verify_pacman kdeconnect
+if [ $? -eq 0 ]; then
+	sudo firewall-cmd --permanent --zone=public --add-service=kdeconnect
+	sudo firewall-cmd --reload
+fi
 
 # Configuración de flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
