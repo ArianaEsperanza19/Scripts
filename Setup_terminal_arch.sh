@@ -91,10 +91,19 @@ install_and_verify_pacman obsidian
 install_and_verify_pacman xournalpp
 install_and_verify_pacman cpu-x
 install_and_verify_pacman handbrake
-install_and_verify_pacman kdeconnect
-if [ $? -eq 0 ]; then
-	sudo firewall-cmd --permanent --zone=public --add-service=kdeconnect
-	sudo firewall-cmd --reload
+if [[ "$XDG_CURRENT_DESKTOP" == *"KDE"* ]]; then
+	install_and_verify_pacman kdeconnect
+	# Verificamos si el comando anterior fue exitoso
+	if [ $? -eq 0 ]; then
+		# Verificamos si firewalld está corriendo antes de lanzar comandos
+		if systemctl is-active --quiet firewalld; then
+			sudo firewall-cmd --permanent --zone=public --add-service=kdeconnect
+			sudo firewall-cmd --reload
+			echo "KDE Connect configurado en el firewall."
+		else
+			echo "Firewalld no está activo, saltando configuración de red."
+		fi
+	fi
 fi
 
 # Configuración de flathub
