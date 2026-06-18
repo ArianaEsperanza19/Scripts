@@ -88,7 +88,10 @@ fi
 if ! command wget --version &>/dev/null; then
 	install_and_verify_pacman wget
 fi
-install_and_verify_pacman ibus-anthy
+install_and_verify_pacman fcitx5
+if [ $? -eq 0 ]; then
+	bash JapaSetup.sh
+fi
 install_and_verify_pacman obsidian
 install_and_verify_pacman xournalpp
 install_and_verify_pacman cpu-x
