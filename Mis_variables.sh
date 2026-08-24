@@ -1,85 +1,56 @@
 #!/bin/bash
-# Script para crear un archivo .Mis_variables en la carpeta actual y agregarlo al .bashrc
-CURRENT_USER=$(whoami)
-cd ~/
+archivo_vars="$HOME/.Mis_variables"
 
-# Atento: Si el archivo ya existe, no se modificará
-# Verifica que Mis_scripts este en la carpeta esperada
-if [ -e ".Mis_variables" ]; then
-	echo "El archivo $archivo ya existe. No se modificará."
-	echo "Para continuar elimina el archivo."
-	exit 1 # Salir del script con código de error
-else
-	if echo "# Editor de terminal por defecto
-		export VISUAL=nvim
-		# Mis scripts
-		export PATH=$PATH:/home/$CURRENT_USER/Otros/Mis_scripts" >>.Mis_variables; then
-		echo "El archivo Mis_variables se ha creado correctamente."
-	fi
-fi
-#!/bin/bash
+# Función para configurar el contenido
+escribir_configuracion() {
+	cat <<'EOF' >"$archivo_vars"
+# Editor de terminal
+export VISUAL=nvim
 
-archivo="$HOME/.bashrc" # Archivo a modificar
-texto_a_buscar="if [ -f ~/.Mis_variables ]; then"
-linea="
-# Agregar de alias en archivo externo
-if [ -f ~/.Mis_variables ]; then
-	. ~/.Mis_variables
-fi
-"
+# Rutas de herramientas
+export PATH="$HOME/Otros/Mis_scripts:$PATH"
+export PATH="$HOME/.deno/bin:$PATH"
+export PATH="/opt/lampp/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/share/nvim/mason/packages/:$PATH"
 
-# Verificar si el archivo existe
-if [ -e "$archivo" ]; then
-	if grep -Fq "$texto_a_buscar" "$archivo"; then
-		echo "Variables ya agregadas a $archivo."
+# Zoxide
+eval "$(zoxide init bash)"
+# Thefuck
+eval $(thefuck --alias)
+eval $(thefuck --alias FUCK)
+
+# Fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Colores de Alacritty
+export PS1='\[\e[32m\][\u@\h \W]\$ \[\e[0m\]'
+EOF
+	echo "Archivo $archivo_vars configurado correctamente."
+}
+
+# Lógica de verificación
+if [ -e "$archivo_vars" ]; then
+	echo "¡Atención! El archivo $archivo_vars ya existe."
+	read -p "¿Deseas borrarlo y crear uno nuevo? (s/n): " confirmacion
+
+	if [[ "$confirmacion" == "s" || "$confirmacion" == "S" ]]; then
+		rm "$archivo_vars"
+		escribir_configuracion
 	else
-		echo "$linea" >>"$archivo"
-		if [ $? -eq 0 ]; then
-			echo "Se ha agregado el texto a $archivo correctamente."
-		else
-			echo "Hubo un error al modificar el archivo."
-		fi
+		echo "Operación cancelada. El archivo original se mantiene intacto."
+		exit 0
 	fi
 else
-	echo "El archivo $archivo no existe."
+	escribir_configuracion
 fi
 
-#BUG: No detecta cuando la config ya esta pesente en bashrc
-
-# Usamos una marca única para que el script no falle al buscar
-marca="# [PROMPT_COLORES_RUST]"
-colores="export PS1='\[\e[32m\]\u@\h\[\e[m\]:\[\e[34m\]\w\[\e[m\]\$' $marca"
-
-if [ -f "$archivo" ]; then
-	# Buscamos solo la marca única, no toda la cadena compleja
-	if grep -qF "$marca" "$archivo"; then
-		echo "La configuración de colores ya existe en $archivo."
-	else
-		echo -e "\n$colores" >>"$archivo"
-		if [ $? -eq 0 ]; then
-			echo "Configuración agregada correctamente."
-		else
-			echo "Error al modificar el archivo."
-		fi
-	fi
-else
-	echo "El archivo $archivo no existe."
-fi
-
-# Comprueba si el comando 'zoxide' existe
-if command -v zoxide &>/dev/null; then
-	archivo="$HOME/.Mis_variables"
-	linea="eval \"\$(zoxide init bash)\""
-	if [ -e "$archivo" ]; then
-		if ! grep -Fq "$linea" "$archivo"; then
-			echo "$linea" >>"$archivo"
-			echo "Zoxide agregado a $archivo. Zoxide está listo para usarse."
-		else
-			echo "Zoxide ya estaba en $archivo."
-		fi
-	fi
-else
-	echo "Zoxide no estaba instalado. Por favor, instala zoxide antes de usarlo."
-fi
-
-source ~/.bashrc
+source "$archivo_vars"
+echo "Entorno actualizado."

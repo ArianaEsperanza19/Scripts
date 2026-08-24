@@ -1,0 +1,31 @@
+#!/bin/bash
+# Permite crear archivos PDF a partir de Markdown usando el motor Typst
+read -p "Introduce el nombre y ruta exactos del archivo Markdown original: " original
+read -p "Ingresa el nuevo nombre del archivo PDF, incluyendo su extención: " nuevo
+
+# 1. Verificar si el archivo original existe
+if [ -f "$original" ]; then
+	echo "¡Archivo original '$original' encontrado!"
+
+	# 2. Verificar si el archivo nuevo ya existe
+	if [ -f "$nuevo" ]; then
+		read -p "El archivo '$nuevo' ya existe. ¿Deseas sobrescribirlo? (s/n): " opcion
+
+		# Validar la respuesta del usuario
+		if [ "$opcion" = "s" ] || [ "$opcion" = "S" ]; then
+			echo "Sobrescribiendo '$nuevo'..."
+			pandoc "$original" --output "$nuevo" --pdf-engine=typst
+			echo "¡Conversión completada con éxito!"
+		else
+			echo "Operación cancelada. No se sobrescribió el archivo."
+		fi
+	else
+		# Si el archivo nuevo no existe, se crea directamente
+		echo "Creando '$nuevo'..."
+		pandoc "$original" --output "$nuevo" --pdf-engine=typst
+		echo "¡Conversión completada con éxito!"
+	fi
+else
+	# 3. Si no se encuentra el original, avisa
+	echo "Aviso: No se encontró el archivo original '$original'."
+fi

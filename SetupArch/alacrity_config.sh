@@ -115,3 +115,7 @@ else
 		echo "✅ Alacritty configurado exitosamente."
 	fi
 fi
+
+echo "Verifica la siguiente linea dentro de .Mis_variables"
+echo "export PS1='\[\e[32m\][\u@\h \W]\$ \[\e[0m\]'"
+echo "Si no está, entonces la terminal no mostrará todos sus colores"

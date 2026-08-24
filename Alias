@@ -1,0 +1,65 @@
+# Alias
+# Cambiando ls a eza
+alias ls='eza --icons -a --group-directories-first'
+alias ld='eza --icons -D --group-directories-first'
+alias ll='eza --icons -l --header --group-directories-first'
+alias lll='eza --icons -la --header --group-directories-first'
+alias lo='eza --icons -lo --header --group-directories-first'
+alias lt='eza --icons -aT --group-directories-first'
+alias l.='eza --icons -a | grep -E "^\."'
+alias li='eza --icons -a --git-ignore --group-directories-first'
+alias lg='eza --icons -al --header --git --group-directories-first'
+alias lp='eza --icons -al --header --octal-permissions --group-directories-first'
+alias vim='nvim'
+alias fcf='fzf | wl-copy' # Copiar dirección encontrada
+alias open='dolphin' # Abrir ubicación con dolphin
+alias fcitx='fcitx5 -r -d' # Volver a ejecutar fcitx
+
+# Funciones de búsqueda y apertura
+
+# Abre un archivo encontrado con el programa que tú elijas
+# Uso: fop vim  (o fop vlc, fop gimp, etc.)
+fop() {
+	local programa="$1"
+	local archivo
+	archivo=$(fzf)
+
+	if [ -n "$archivo" ]; then
+		"$programa" "$archivo"
+	else
+		echo "No se seleccionó ningún archivo."
+	fi
+}
+
+# Vista previa rápida de archivos con fzf y bat
+# Uso: fcat
+fcat() {
+	local archivo
+	archivo=$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}')
+
+	if [ -n "$archivo" ]; then
+		bat --style=numbers --color=always "$archivo"
+	fi
+}
+
+# Cargo
+alias cr='cargo run'
+alias cb='cargo build'
+alias cc='cargo check'
+
+# Direcciones
+alias fonts='cd "$HOME/.local/share/fonts/"'
+
+# The fuck
+eval "$(thefuck --alias)"
+
+# Configuración
+alias bashrc='nvim ~/.bashrc'
+alias sbash='source ~/.bashrc' # Recargar .bashrc
+
+# Sync
+alias sync='systemctl --user start syncthing.service' # dir del servidor -> http://127.0.0.1:8384/
+
+# IA
+alias gemma='ollama run gemma4:latest'
+alias llama='ollama run llama3.2'

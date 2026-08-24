@@ -1,4 +1,4 @@
-#!/bin/bash
+/#!/bin/bash
 # Script para la instalación de mis paquetes con pacman y flatpak
 # Recuerda instalar primero flatpak, reiniciar la terminal y luego ejecuta este script para una instalación sin inconvenientes.
 # --- Función para instalar y verificar un paquete pacman ---
@@ -58,12 +58,15 @@ if [ $? -eq 0 ]; then
 	sudo pacman -Syu libvorbis flac wavpack libmad
 fi
 install_and_verify_pacman pandoc
+install_and_verify_pacman typst
 install_and_verify_pacman pavucontrol
 install_and_verify_pacman obs-studio
 install_and_verify_pacman nvim
+if [ $? -eq 0 ]; then
+	bash Neovim_setup.sh
+fi
 install_and_verify_pacman neovide
-bash Neovim_setup.sh
-install_and_verify_pacman typst
+install_and_verify_pacman thefuck
 echo "#------------------------------------------------------------------------------------------------------#"
 echo "✅ Todos los programas esenciales de la terminal han sido procesados."
 echo "------------------------------------------------------------------------------------------------------"
@@ -71,6 +74,7 @@ echo "--------------------------------------------------------------------------
 echo "✅ Iniciando la instalación de otras aplicaciones..."
 echo "------------------------------------------------------------------------------------------------------"
 exito+=("#------------------------Otros Programas------------------------#")
+install_and_verify_pacman fastfetch
 install_and_verify_pacman zathura
 install_and_verify_pacman libreoffice
 install_and_verify_pacman keepassxc
@@ -81,8 +85,10 @@ install_and_verify_pacman lutris
 install_and_verify_pacman steam # selecciona el vulkan-driver y las librerias
 install_and_verify_pacman mpv   # Sustituto a vlc, el cual da problemas de compatibilidad
 install_and_verify_pacman alacritty
+install_and_verify_pacman gnucash
+install_and_verify_pacman brightnessctl
 if [ $? -eq 0 ]; then
-	bash alacritty_config.sh
+	bash ~/Otros/Mis_scripts/SetupArch/alacrity_config.sh
 fi
 # Instalar wget si no está instalado
 if ! command wget --version &>/dev/null; then
@@ -90,7 +96,7 @@ if ! command wget --version &>/dev/null; then
 fi
 install_and_verify_pacman fcitx5
 if [ $? -eq 0 ]; then
-	bash JapaSetup.sh
+	bash Fcitx/JapaSetup.sh
 fi
 install_and_verify_pacman obsidian
 install_and_verify_pacman xournalpp
@@ -117,9 +123,11 @@ install_and_verify_flatpak flatseal
 install_and_verify_flatpak warehouse
 install_and_verify_flatpak drawio
 install_and_verify_flatpak peazip
-install_and_verify_flatpak joplin
-install_and_verify_flatpak luna
 install_and_verify_flatpak Ankiweb
+install_and_verify_flatpak qalculate
+if [ $? -eq 0 ]; then
+	sudo pacman -Rs kcalc
+fi
 
 echo "------------------------------------------------------------------------------------------------------"
 echo "✅ ¡Script completado! Se han procesado todas las instalaciones de aplicaciones GUI."
@@ -153,6 +161,7 @@ echo "--------------------------------------------------------------------------
 # Instalar Python y PIP
 install_and_verify_pacman python3
 install_and_verify_pacman python-pip
+install_and_verify_pacman pyenv
 
 echo "Verificando Python y PIP..."
 if command -v python3 &>/dev/null; then
@@ -165,6 +174,12 @@ if command -v pip3 &>/dev/null; then
 	echo "✅ PIP 3 instalado. Versión: $(pip3 -V)"
 else
 	echo "❌ PIP 3 no se encontró."
+fi
+
+if command -v pyenv &>/dev/null; then
+	echo "✅ Pyenv instalado. Versión: $(pyenv -V)"
+else
+	echo "❌ Pyenv 3 no se encontró."
 fi
 
 echo "------------------------------------------------------------------------------------------------------"
@@ -229,3 +244,7 @@ echo "   source \$HOME/.deno/bin" # Esta línea puede no ser necesaria si el scr
 echo "   eval \"\$(zoxide init bash)\""
 echo "3. Instala mediante la tienda de software (o Flatpak/Snap si no están disponibles en apt) las aplicaciones gráficas como Xournal++."
 echo "#------------------------------------------------------------------------------------------------------#"
+
+#bash atajos_globales_kde.sh
+bash setup_intel_vulkan.sh
+bash verificador_sistema.sh
